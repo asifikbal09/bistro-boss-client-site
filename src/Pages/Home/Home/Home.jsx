@@ -1,4 +1,5 @@
 import Catagory from "../Catagory/Catagory";
+import Featured from "../Featured/Featured";
 import PopularMenu from "../PopularMenu/PopularMenu";
 import Slider from "../Slider/Slider";
 
@@ -8,6 +9,7 @@ const Home = () => {
             <Slider></Slider>
             <Catagory></Catagory>
             <PopularMenu></PopularMenu>
+            <Featured></Featured>
         </div>
     );
 };
