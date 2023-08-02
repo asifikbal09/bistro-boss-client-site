@@ -21,4 +21,6 @@ module.exports = {
     "react/prop-types": "off",
 
   },
+  "parser": "@babel/eslint-parser"
+
 }
