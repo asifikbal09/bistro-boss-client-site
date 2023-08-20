@@ -2,10 +2,13 @@ import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Firebase/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useCards from "../../Hooks/useCards";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [card] = useCards();
   const handelLogOut = () => {
     logOut()
       .then(() => {
@@ -33,9 +36,19 @@ const Navbar = () => {
       <li>
         <Link to="/order/salad">Order Food</Link>
       </li>
+      <li>
+        <Link to="/">
+          <button className="btn">
+            <FaShoppingCart></FaShoppingCart>
+            <div className="badge badge-secondary">{card.length}</div>
+          </button>
+        </Link>
+      </li>
       {user ? (
         <>
-          <button onClick={handelLogOut} className="btn btn-ghost">Log Out</button>
+          <button onClick={handelLogOut} className="btn btn-ghost">
+            Log Out
+          </button>
         </>
       ) : (
         <>
@@ -72,7 +85,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm text-slate-600 dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               {item}
             </ul>

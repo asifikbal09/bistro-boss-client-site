@@ -1,37 +1,56 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../Firebase/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-  const {createUser} = useContext(AuthContext);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  const from = location.state?.from?.pathname || "/";
 
-//   const handleSignUp = (e) => {
-//     e.preventDefault();
-//     const form = e.target;
-//     const email = form.email.value;
-//     const password = form.password.value;
-//     createUser(email, password)
-//     .then((result) =>{
-//         const user = result.user
-//     })
-//     .catch((error) => {
-//         console.log(error.message)
-//     })
-//     form.reset()
-//   };
+  //   const handleSignUp = (e) => {
+  //     e.preventDefault();
+  //     const form = e.target;
+  //     const email = form.email.value;
+  //     const password = form.password.value;
+  //     createUser(email, password)
+  //     .then((result) =>{
+  //         const user = result.user
+  //     })
+  //     .catch((error) => {
+  //         console.log(error.message)
+  //     })
+  //     form.reset()
+  //   };
 
-// react hook form using for create user
-const onSubmit = data => {
-    createUser(data.email, data.password)
-    .then(result =>{
-        const loggedUser = result.user
-        console.log(loggedUser)
-    })
-};
-
+  // react hook form using for create user
+  const onSubmit = (data) => {
+    createUser(data.email, data.password).then((result) => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+      updateUserProfile(data.name, data.photoURL)
+      .then(()=>{
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Successfully logged in ',
+          showConfirmButton: false,
+          timer: 2000
+        })
+      })
+      .catch(error => console.log(error))
+      navigate(from, { replace: true });
+    });
+  };
 
   return (
     <div>
@@ -53,12 +72,28 @@ const onSubmit = data => {
                 </label>
                 <input
                   type="text"
-                  {...register("name", {required:true})}
+                  {...register("name", { required: true })}
                   name="name"
                   placeholder="name"
                   className="input input-bordered"
                 />
-                {errors.name?.type === 'required' && <p className="text-red-600">Name is required</p>}
+                {errors.name?.type === "required" && (
+                  <p className="text-red-600">Name is required</p>
+                )}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">PhotoURL</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("photoURL", { required: true })}
+                  placeholder="photoURL"
+                  className="input input-bordered"
+                />
+                {errors.photoURL?.type === "required" && (
+                  <p className="text-red-600">Photo URL is required</p>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -67,11 +102,13 @@ const onSubmit = data => {
                 <input
                   type="text"
                   name="email"
-                  {...register("email", {require:true})}
+                  {...register("email", { require: true })}
                   placeholder="email"
                   className="input input-bordered"
                 />
-                {errors.email?.type === 'required' && <p className="text-red-600">Email is required</p>}
+                {errors.email?.type === "required" && (
+                  <p className="text-red-600">Email is required</p>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -80,26 +117,37 @@ const onSubmit = data => {
                 <input
                   type="password"
                   name="password"
-                  {...register("password", { 
-                    required: true, 
+                  {...register("password", {
+                    required: true,
                     maxLength: 20,
-                    minLength:6,
-                    pattern:/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]/
-                })}
-                  
+                    minLength: 6,
+                    pattern:
+                      /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]/,
+                  })}
                   placeholder="password"
                   className="input input-bordered"
                 />
-                {errors.password?.type === 'maxLength' && <p className="text-red-600">Password is required</p>}
-                {errors.password?.type === 'minLength' && <p className="text-red-600">Password is required</p>}
-                {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one uppercase one lowercase one special character</p>}
+                {errors.password?.type === "maxLength" && (
+                  <p className="text-red-600">Password is required</p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <p className="text-red-600">Password is required</p>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <p className="text-red-600">
+                    Password must have one uppercase one lowercase one special
+                    character
+                  </p>
+                )}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
                   </a>
                 </label>
               </div>
-              <p>Already have an account?<Link to='/login'>Sign In</Link></p>
+              <p>
+                Already have an account?<Link to="/login">Sign In</Link>
+              </p>
               <div className="form-control mt-6">
                 <input
                   className="btn btn-primary"
