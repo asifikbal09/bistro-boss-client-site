@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.drawer-side a.active{
+    color: red;
+    background-color: transparent;
+  }
+.drawer-side a li{
+background-color: transparent;
+}
+:hover .drawer-side a li{
+    background-color: transparent;
+  }
+.menu li a{
+    background-color: transparent;
+}
+:hover .menu li a{
+    background-color: transparent;
+}

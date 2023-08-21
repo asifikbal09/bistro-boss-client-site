@@ -10,7 +10,7 @@ const Order = () => {
   const categories = ["salad", "pizza", "soup", "dessert", "drink"];
   const { category } = useParams();
   const initialIndex = categories.indexOf(category);
-  console.log(initialIndex)
+  console.log(initialIndex);
   const [tabIndex, setTabIndex] = useState(initialIndex);
   return (
     <div>
@@ -25,16 +25,48 @@ const Order = () => {
       <Tabs
         defaultIndex={initialIndex}
         onSelect={(index) => setTabIndex(index)}
-        className={'mb-16'}
+        className={"mb-16"}
       >
         <TabList
-          className={"flex justify-center gap-5 my-10 text-xl font-semibold cursor-pointer"}
+          className={
+            "flex justify-center gap-5 my-10 text-xl font-semibold cursor-pointer"
+          }
         >
-          <Tab className={tabIndex===0 && 'text-[#BB8506] border-b-2 border-[#BB8506]'}>Salad</Tab>
-          <Tab className={tabIndex===1 && 'text-[#BB8506] border-b-2 border-[#BB8506]'}>Pizza</Tab>
-          <Tab className={tabIndex===2 && 'text-[#BB8506] border-b-2 border-[#BB8506]'}>Soup</Tab>
-          <Tab className={tabIndex===3 && 'text-[#BB8506] border-b-2 border-[#BB8506]'}>Dessert</Tab>
-          <Tab className={tabIndex===4 && 'text-[#BB8506] border-b-2 border-[#BB8506]'}>Drinks</Tab>
+          <Tab
+            className={
+              tabIndex === 0 && "text-[#BB8506] border-b-2 border-[#BB8506]"
+            }
+          >
+            Salad
+          </Tab>
+          <Tab
+            className={
+              tabIndex === 1 && "text-[#BB8506] border-b-2 border-[#BB8506]"
+            }
+          >
+            Pizza
+          </Tab>
+          <Tab
+            className={
+              tabIndex === 2 && "text-[#BB8506] border-b-2 border-[#BB8506]"
+            }
+          >
+            Soup
+          </Tab>
+          <Tab
+            className={
+              tabIndex === 3 && "text-[#BB8506] border-b-2 border-[#BB8506]"
+            }
+          >
+            Dessert
+          </Tab>
+          <Tab
+            className={
+              tabIndex === 4 && "text-[#BB8506] border-b-2 border-[#BB8506]"
+            }
+          >
+            Drinks
+          </Tab>
         </TabList>
         {/* Salad item cards */}
         <TabPanel>

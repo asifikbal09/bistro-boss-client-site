@@ -3,6 +3,7 @@ import { AuthContext } from "../../Firebase/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import SocialLogin from "../../component/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const {
@@ -38,16 +39,31 @@ const SignUp = () => {
       const loggedUser = result.user;
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
-      .then(()=>{
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Successfully logged in ',
-          showConfirmButton: false,
-          timer: 2000
+        .then(() => {
+          const saveUser = { name: data.name, email: data.email };
+          fetch("http://localhost:5000/users",{
+            method:'POST',
+            headers:{
+              'content-type': "application/json"
+            },
+            body: JSON.stringify(saveUser)
+
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                reset();
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Successfully logged in ",
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
+              }
+            });
         })
-      })
-      .catch(error => console.log(error))
+        .catch((error) => console.log(error));
       navigate(from, { replace: true });
     });
   };
@@ -156,6 +172,7 @@ const SignUp = () => {
                 />
               </div>
             </form>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

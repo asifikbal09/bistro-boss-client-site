@@ -7,6 +7,7 @@ import {
 import { AuthContext } from "../../Firebase/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import SocialLogin from "../../component/SocialLogin/SocialLogin";
 
 const Login = () => {
   useEffect(() => {
@@ -121,6 +122,7 @@ const Login = () => {
                 />
               </div>
             </form>
+          <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

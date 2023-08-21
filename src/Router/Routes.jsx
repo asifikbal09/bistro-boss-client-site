@@ -5,6 +5,10 @@ import Menu from "../Pages/Menu/Menu/Menu";
 import Order from "../Order/Order/Order";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import Dashboard from "../Layouts/Dashboard/Dashboard";
+import MyCart from "../Pages/Dashboard/MyCart/MyCart";
+import PrivetRoute from "./PrivateRoutes";
+import Users from "../Pages/Dashboard/AllUsers/Users";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +37,20 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:'dashboard',
+    element:<PrivetRoute><Dashboard></Dashboard></PrivetRoute>,
+    children:[
+      {
+        path:'myCard',
+        element:<MyCart></MyCart>
+      },
+      {
+        path:'allUsers',
+        element:<Users></Users>
+      }
+    ]
+  }
 ]);
 
 export default router;

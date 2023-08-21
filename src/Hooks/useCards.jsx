@@ -9,7 +9,7 @@ const useCards = () => {
     queryKey: ["cards", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/cards?email=${user.email}`
+        `http://localhost:5000/cards?email=${user?.email}`
       );
       return res.json();
     },
