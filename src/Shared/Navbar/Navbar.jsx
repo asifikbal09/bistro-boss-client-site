@@ -40,7 +40,7 @@ const Navbar = () => {
         <Link to="/dashboard/myCard">
           <button className="btn">
             <FaShoppingCart></FaShoppingCart>
-            <div className="badge badge-secondary">{card.length}</div>
+            <div className="badge badge-secondary">+{card?.length || 0}</div>
           </button>
         </Link>
       </li>

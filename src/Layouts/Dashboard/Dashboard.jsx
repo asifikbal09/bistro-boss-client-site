@@ -1,9 +1,11 @@
 import React from 'react';
 import { FaBars, FaCalendar, FaHome, FaShoppingBag, FaShoppingCart, FaUsers, FaWallet } from 'react-icons/fa';
 import {  NavLink, Outlet } from 'react-router-dom';
+import useAdmin from '../../Hooks/useAdmin';
 
 const Dashboard = () => {
-  const isAdmin = true
+  // const isAdmin = true
+  const [isAdmin] =useAdmin()
   const adminItem =(
     <>
          <li><NavLink to='/dashboard/home'><FaHome></FaHome>User Home</NavLink></li>
