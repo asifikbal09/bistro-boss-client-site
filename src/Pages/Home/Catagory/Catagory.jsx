@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, FreeMode, Pagination } from "swiper/modules";
 import slider1 from "../../../assets/home/slide1.jpg";
 import slider2 from "../../../assets/home/slide2.jpg";
 import slider3 from "../../../assets/home/slide3.jpg";
@@ -15,16 +15,13 @@ const Catagory = () => {
     <SectionTitle heading={'order online'} subHeading={'From 11:00am to 10:00pm'}></SectionTitle>
      <Swiper
       spaceBetween={30}
-      loop={true}
-          autoplay={{
-            delay: 500,
-            disableOnInteraction: false,
-          }}
+      slidesPerView={5}
       centeredSlides={true}
+      freeMode={true}
       pagination={{
         clickable: true,
       }}
-      modules={[Pagination,Autoplay]}
+      modules={[Pagination,FreeMode]}
       className="mySwiper mb-20"
     >
       <SwiperSlide>

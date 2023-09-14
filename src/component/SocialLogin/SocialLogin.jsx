@@ -2,8 +2,8 @@ import React from "react";
 import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../Firebase/AuthProvider";
-import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SocialLogin = () => {
   const { googleLogin } = useContext(AuthContext);
@@ -11,6 +11,7 @@ const SocialLogin = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
+  console.log(from)
 
   const handleGoogleLogin = () => {
     googleLogin()
@@ -20,17 +21,10 @@ const SocialLogin = () => {
           name: loggedUser.displayName,
           email: loggedUser.email,
         };
-        fetch("http://localhost:5000/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(saveUser),
-        })
-          .then((res) => res.json())
-          .then(() => {
-            navigate(from, { replace: true });
-          });
+        axios.post("http://localhost:5000/users", saveUser).then((res) => {
+          console.log(res);
+        });
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };

@@ -12,6 +12,7 @@ const Order = () => {
   const initialIndex = categories.indexOf(category);
   console.log(initialIndex);
   const [tabIndex, setTabIndex] = useState(initialIndex);
+  const tabStyle = "text-[#BB8506] border-b-2 border-[#BB8506]"
   return (
     <div>
       <Helmet>
@@ -34,35 +35,35 @@ const Order = () => {
         >
           <Tab
             className={
-              tabIndex === 0 && "text-[#BB8506] border-b-2 border-[#BB8506]"
+              tabIndex === 0 && tabStyle
             }
           >
             Salad
           </Tab>
           <Tab
             className={
-              tabIndex === 1 && "text-[#BB8506] border-b-2 border-[#BB8506]"
+              tabIndex === 1 && tabStyle
             }
           >
             Pizza
           </Tab>
           <Tab
             className={
-              tabIndex === 2 && "text-[#BB8506] border-b-2 border-[#BB8506]"
+              tabIndex === 2 && tabStyle
             }
           >
             Soup
           </Tab>
           <Tab
             className={
-              tabIndex === 3 && "text-[#BB8506] border-b-2 border-[#BB8506]"
+              tabIndex === 3 && tabStyle
             }
           >
             Dessert
           </Tab>
           <Tab
             className={
-              tabIndex === 4 && "text-[#BB8506] border-b-2 border-[#BB8506]"
+              tabIndex === 4 && tabStyle
             }
           >
             Drinks

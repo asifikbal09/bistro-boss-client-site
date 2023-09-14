@@ -115,7 +115,7 @@ const Login = () => {
               <p>New to Bistro Boss?<Link to='/signup'>Create account</Link></p>
               <div className="form-control mt-6">
                 <input
-                  disabled={disable}
+                  disabled={false}
                   className="btn btn-primary"
                   type="submit"
                   value="Login"

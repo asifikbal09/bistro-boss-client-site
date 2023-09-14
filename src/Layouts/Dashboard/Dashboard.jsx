@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaBars, FaCalendar, FaHome, FaShoppingBag, FaShoppingCart, FaUsers, FaWallet } from 'react-icons/fa';
+import { FaBars, FaCalendar, FaHome, FaShoppingBag, FaShoppingCart, FaUsers, FaUtensils, FaWallet } from 'react-icons/fa';
 import {  NavLink, Outlet } from 'react-router-dom';
 import useAdmin from '../../Hooks/useAdmin';
 
@@ -9,7 +9,8 @@ const Dashboard = () => {
   const adminItem =(
     <>
          <li><NavLink to='/dashboard/home'><FaHome></FaHome>User Home</NavLink></li>
-        <li><NavLink to='/dashboard/reservation'><FaCalendar></FaCalendar>Reservation</NavLink></li>
+        <li><NavLink to='/dashboard/addItem'><FaUtensils></FaUtensils>Add an Item</NavLink></li>
+        <li><NavLink to='/dashboard/manegeItem'><FaUtensils></FaUtensils>Manege Items</NavLink></li>
         <li><NavLink to='/dashboard/history'><FaWallet></FaWallet> Payment History</NavLink></li>
         <li><NavLink to='/dashboard/allUsers'><FaUsers></FaUsers>All Users</NavLink></li>
         </>
@@ -35,7 +36,7 @@ const Dashboard = () => {
     return (
         <div className="drawer lg:drawer-open">
   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-  <div className="drawer-content flex flex-col my-16 mx-16 justify-center">
+  <div className="drawer-content flex flex-col mb-6 mx-10 justify-center">
     {/* Page content here */}
     <Outlet></Outlet>
     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
@@ -45,7 +46,7 @@ const Dashboard = () => {
     <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
     <ul className="menu p-4 w-80 h-full">
       {/* Sidebar content here */}
-     {isAdmin? adminItem:userItem}
+     {isAdmin?.admin? adminItem:userItem}
      <div className="divider"></div>
      {navItems}
     </ul>

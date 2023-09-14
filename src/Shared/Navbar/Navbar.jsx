@@ -26,7 +26,6 @@ const Navbar = () => {
   };
   const item = (
     <>
-      {" "}
       <li>
         <Link to="/">Home</Link>
       </li>
@@ -40,7 +39,7 @@ const Navbar = () => {
         <Link to="/dashboard/myCard">
           <button className="btn">
             <FaShoppingCart></FaShoppingCart>
-            <div className="badge badge-secondary">+{card?.length || 0}</div>
+            <div className="badge badge-secondary">+  {card?.length || 0}</div>
           </button>
         </Link>
       </li>

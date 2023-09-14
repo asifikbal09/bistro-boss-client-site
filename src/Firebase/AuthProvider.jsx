@@ -48,6 +48,7 @@ const AuthProvider = ({ children }) => {
 
   //google login
   const googleLogin = ()=>{
+    setLoader(true)
     const provider = new GoogleAuthProvider()
     return signInWithPopup(auth, provider)
   }
@@ -55,18 +56,18 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
+      console.log('user email', currentUser?.email);
 
       if(currentUser){
-        axios.post('http://localhost:5000/jwt', {email : currentUser.email})
+        axios.post('http://localhost:5000/jwt', {email : currentUser?.email})
         .then(data=>{
-          console.log(data.data.token)
           localStorage.setItem('access-token', data.data.token)
           setLoader(false);
         })
       }
       else{
         localStorage.removeItem('access-token')
+        setLoader(false);
       }
 
     });
